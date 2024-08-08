@@ -4,7 +4,9 @@ const usersCollection = db.collection("users");
 
 export const userProfile = async (req, res) => {
     try {
-        const user = await usersCollection.findOne({ email: req.jwt.email });
+        const user = await usersCollection.findOne({
+            email: req.headers.email,
+        });
         return res.json({
             message: "User data retrieved successfully.",
             data: { user },

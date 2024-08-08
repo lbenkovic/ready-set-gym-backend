@@ -5,6 +5,7 @@ export const login = async (req, res) => {
     try {
         const authUser = await auth(userData.email, userData.password);
         const token = authUser.token;
+        console.log("AUTHUSER:", authUser);
         return res.json({
             message: "Login successful",
             data: { token },
