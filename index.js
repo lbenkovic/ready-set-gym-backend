@@ -2,11 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import { auth } from "./services/authService.js";
-import usersController from "./controllers/usersController.js";
+import { registerUser } from "./services/usersService.js";
 import cors from "cors";
 import db from "./database/connection.js";
 import mongo from "mongodb";
 import { authRouter } from "./routers/authRouter.js";
+import { usersRouter } from "./routers/usersRouter.js";
 
 const app = express(); // instanciranje aplikacije
 const port = 3000; // port na kojem će web server slušati
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.get("/", (req, res) => res.send("Hello"));
 app.use("/", authRouter());
+app.use("/", usersRouter());
 // app.get("/users2", async (req, res) => {
 //     try {
 //         const movies = await db
