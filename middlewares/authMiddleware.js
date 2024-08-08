@@ -1,0 +1,81 @@
+import mongo from "mongodb";
+import db from "../database/connection.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { verifyToken } from "../services/authService.js";
+
+// async registerUser(userData) {
+//     const hashedPassword = await bcrypt.hash(userData.password, 10);
+//     try {
+//         await usersCollection.insertOne({
+//             _id: new ObjectId(),
+//             firstName: userData.firstName,
+//             lastName: userData.lastName,
+//             email: userData.email,
+//             password: hashedPassword,
+//         });
+//     } catch (error) {
+//         if (error.code === 11000) {
+//             throw new Error(
+//                 "Email already exists. Please choose a different one."
+//             );
+//         } else {
+//             throw error;
+//         }
+//     }
+// },
+export const authMiddleware = (req, res, next) => {
+    const authorization = req.headers.authorization.split(" ");
+    const type = authorization[0];
+    const token = authorization[1];
+
+    if (type !== "Bearer") {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+    const tokenPayload = verifyToken(token);
+    if (!tokenPayload) {
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+    return next();
+};
+// async auth(email, password) {
+//     let userData = await usersCollection.findOne({ email: email });
+
+//     console.log("Received data: ", email, password);
+//     console.log("User data from the database: ", userData);
+
+//     if (
+//         userData &&
+//         userData.password &&
+//         (await bcrypt.compare(password, userData.password))
+//     ) {
+//         delete userData.password;
+//         let token = jwt.sign(userData, process.env.JWT_SECRET, {
+//             algorithm: "HS512",
+//             expiresIn: "1 week",
+//         });
+//         return {
+//             token,
+//             email: userData.email,
+//         };
+//     } else {
+//         throw new Error("Cannot authenticate");
+//     }
+// },
+
+// verify(req, res, next) {
+//     try {
+//         let authorization = req.headers.authorization.split(" ");
+//         let type = authorization[0];
+//         let token = authorization[1];
+
+//         if (type !== "Bearer") {
+//             return res.status(401).send();
+//         } else {
+//             req.jwt = jwt.verify(token, process.env.JWT_SECRET);
+//             return next();
+//         }
+//     } catch (error) {
+//         return res.status(401).send();
+//     }
+// },
