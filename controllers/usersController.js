@@ -9,7 +9,7 @@ export const userProfile = async (req, res) => {
         });
         return res.json({
             message: "User data retrieved successfully.",
-            data: { user },
+            data: user,
         });
     } catch (error) {
         console.error(`[GET] Users error: ${error.message}`);

@@ -7,7 +7,7 @@ export const login = async (req, res) => {
         const token = authUser.token;
         return res.json({
             message: "Login successful",
-            data: { token },
+            data: token,
         });
     } catch (error) {
         console.error(`[POST] Login error: ${error.message}`);
