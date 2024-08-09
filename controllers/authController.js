@@ -1,14 +1,16 @@
 import { auth } from "../services/authService.js";
+import {
+    addAuthCookieToRes,
+    removeAuthCookieFromRes,
+} from "../services/cookieService.js";
 
 export const login = async (req, res) => {
-    const userData = req.body;
+    const { email, password } = req.body;
     try {
-        const authUser = await auth(userData.email, userData.password);
+        const authUser = await auth(email, password);
         const token = authUser.token;
-        return res.json({
-            message: "Login successful",
-            data: { token },
-        });
+        addAuthCookieToRes(res, token, email);
+        return res.json({ message: "Login successful", data: {} });
     } catch (error) {
         console.error(`[POST] Login error: ${error.message}`);
         res.status(500).json({
@@ -16,4 +18,12 @@ export const login = async (req, res) => {
             data: {},
         });
     }
+};
+
+export const logout = async (req, res) => {
+    removeAuthCookieFromRes(res);
+    return res.json({
+        message: "Logout successful",
+        data: {},
+    });
 };

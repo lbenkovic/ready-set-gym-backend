@@ -22,10 +22,7 @@ export const verifyToken = (accessToken) => {
 };
 
 export const auth = async (email, password) => {
-    let userData = await usersCollection.findOne({ email: email });
-
-    console.log("Received data: ", email, password);
-    console.log("User data from the database: ", userData);
+    const userData = await usersCollection.findOne({ email: email });
 
     if (
         userData &&
@@ -33,7 +30,7 @@ export const auth = async (email, password) => {
         (await bcrypt.compare(password, userData.password))
     ) {
         delete userData.password;
-        let token = jwt.sign(userData, process.env.JWT_SECRET, {
+        const token = jwt.sign(userData, process.env.JWT_SECRET, {
             algorithm: "HS512",
             expiresIn: "1 week",
         });
