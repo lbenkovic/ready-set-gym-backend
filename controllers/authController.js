@@ -3,6 +3,40 @@ import {
     addAuthCookieToRes,
     removeAuthCookieFromRes,
 } from "../services/cookieService.js";
+import db from "../database/connection.js";
+import bcrypt from "bcrypt";
+import { ObjectId } from "mongodb";
+
+const usersCollection = db.collection("users");
+usersCollection.createIndex({ email: 1 }, { unique: true });
+
+export const signup = async (req, res) => {
+    const userData = req.body;
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    try {
+        await usersCollection.insertOne({
+            _id: new ObjectId(),
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            password: hashedPassword,
+        });
+        return res.json({ message: "Signup successful", data: {} });
+    } catch (error) {
+        if (error.code === 11000) {
+            return res.status(401).json({
+                message: "Email already exists. Please choose a different one.",
+                data: {},
+            });
+        } else {
+            console.error(`[POST] Signup error: ${error.message}`);
+            res.status(500).json({
+                message: "Internal server error",
+                data: {},
+            });
+        }
+    }
+};
 
 export const login = async (req, res) => {
     const { email, password } = req.body;

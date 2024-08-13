@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-    userProfile,
+    getUserProfile,
     updateUserProfile,
 } from "../controllers/usersController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
@@ -8,6 +8,6 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 export const usersRouter = () => {
     return Router()
         .use(authMiddleware)
-        .get("/user", userProfile)
+        .get("/user", getUserProfile)
         .patch("/user", updateUserProfile);
 };

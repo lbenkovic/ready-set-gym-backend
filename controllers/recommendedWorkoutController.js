@@ -1,20 +1,28 @@
 import db from "../database/connection.js";
 
+const recommendedWorkoutsCollection = db.collection("recommendedWorkouts");
+
 export const getRecommendedWorkouts = async (req, res) => {
-  const workoutType = req.params.workoutType;
-  try {
-    const recommendedWorkouts = await db
-      .collection("recommendedWorkouts")
-      .findOne({ type: workoutType });
-    if (recommendedWorkouts) {
-      res.json(recommendedWorkouts);
-    } else {
-      res
-        .status(404)
-        .json({ message: "No recommended workouts found for this type" });
+    const workoutType = req.params.workoutType;
+    try {
+        const recommendedWorkouts = await recommendedWorkoutsCollection.findOne(
+            { type: workoutType }
+        );
+        if (recommendedWorkouts) {
+            return res.json({
+                message: "Recommended workout retrieved successfully.",
+                data: { recommendedWorkouts },
+            });
+        } else {
+            res.status(404).json({
+                message: "No recommended workouts found for this type",
+                data: {},
+            });
+        }
+    } catch (error) {
+        console.error(`[GET] Recommended workouts error: ${error.message}`);
+        return res
+            .status(500)
+            .json({ message: "Internal server error", data: {} });
     }
-  } catch (error) {
-    console.error("Error fetching recommended workouts:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
 };

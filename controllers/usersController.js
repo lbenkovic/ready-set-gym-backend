@@ -3,14 +3,14 @@ import bcrypt from "bcrypt";
 
 const usersCollection = db.collection("users");
 
-export const userProfile = async (req, res) => {
+export const getUserProfile = async (req, res) => {
     const email = req.cookies.email;
     try {
         const user = await usersCollection.findOne({ email: email });
         if (user) {
             return res.json({
                 message: "User data retrieved successfully.",
-                data: { user }, // Provjerite vraća li se ovdje objekt user
+                data: { user },
             });
         } else {
             return res.status(404).json({
@@ -29,8 +29,6 @@ export const userProfile = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
     try {
-        console.log("USER DATA:", req.body);
-        console.log("USER EMAIL", req.cookies.email);
         const userData = req.body;
         const email = req.cookies.email;
         if (userData.new_password) {

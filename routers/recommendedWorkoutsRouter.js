@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { getRecommendedWorkouts } from "../controllers/recommendedWorkoutController.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 export const recommendedWorkoutsRouter = () => {
-  const router = Router();
-  router.get("/:workoutType", getRecommendedWorkouts);
-  return router;
+    return Router()
+        .use(authMiddleware)
+        .get("/recommendedWorkouts/:workoutType", getRecommendedWorkouts);
 };
