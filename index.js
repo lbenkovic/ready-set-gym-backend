@@ -8,6 +8,7 @@ import { usersRouter } from "./routers/usersRouter.js";
 import { recommendedWorkoutsRouter } from "./routers/recommendedWorkoutsRouter.js";
 import { diaryRouter } from "./routers/diaryRouter.js";
 import { weightRouter } from "./routers/weightRouter.js";
+import { recipesRouter } from "./routers/recipesRouter.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
@@ -23,5 +24,6 @@ app.use("/", usersRouter());
 app.use("/", recommendedWorkoutsRouter());
 app.use("/", diaryRouter());
 app.use("/", weightRouter());
+app.use("/", recipesRouter());
 
 app.listen(port, () => console.log(`Slušam na portu ${port}!`));
