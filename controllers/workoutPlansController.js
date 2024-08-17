@@ -51,3 +51,43 @@ export const getUserWorkoutPlans = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const deletePlan = async (req, res) => {
+  const email = req.cookies.email;
+  const { planId } = req.params; // Recipe ID should be passed as a URL parameter
+
+  try {
+    // Check if user exists
+    const user = await usersCollection.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        data: {},
+      });
+    }
+
+    // Delete the recipe
+    const result = await workoutPlansCollection.deleteOne({
+      _id: new ObjectId(planId), // Convert recipeId to ObjectId
+      email: user.email,
+    });
+
+    if (result.deletedCount > 0) {
+      return res.json({
+        message: "Plan deleted successfully.",
+        data: {},
+      });
+    } else {
+      return res.status(404).json({
+        message: "Plan not found",
+        data: {},
+      });
+    }
+  } catch (error) {
+    console.error(`[DELETE] Plan error: ${error.message}`);
+    return res.status(500).json({
+      message: "Internal server error",
+      data: {},
+    });
+  }
+};
