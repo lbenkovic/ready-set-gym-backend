@@ -61,3 +61,10 @@ export const logout = async (req, res) => {
         data: {},
     });
 };
+
+export const check = async (req, res) => {
+    return res.json({
+        message: "Authenticated",
+        data: {},
+    });
+};

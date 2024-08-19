@@ -16,10 +16,10 @@ const port = 3000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-  })
+    cors({
+        origin: process.env.CORS_ORIGIN,
+        credentials: true,
+    })
 );
 app.use("/", authRouter());
 app.use("/", usersRouter());

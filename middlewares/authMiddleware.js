@@ -1,5 +1,6 @@
 import { verifyToken } from "../services/authService.js";
 import { getCookieTokenFromReq } from "../services/cookieService.js";
+
 export const authMiddleware = (req, res, next) => {
     const { tokenCookie, emailCookie } = getCookieTokenFromReq(req);
     if (!tokenCookie || !emailCookie) {

@@ -3,5 +3,5 @@ import { getExercises } from "../controllers/exerciseListController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 export const exerciseRouter = () => {
-  return Router().get("/exercises", getExercises).use(authMiddleware);
+    return Router().use(authMiddleware).get("/exercises", getExercises);
 };
