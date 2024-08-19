@@ -87,3 +87,34 @@ export const updateUserProfile = async (req, res) => {
         });
     }
 };
+
+export const searchUsers = async (req, res) => {
+    const query = req.params.query;
+    try {
+        const users = await usersCollection
+            .find({
+                $or: [
+                    { firstName: { $regex: query, $options: "i" } },
+                    { lastName: { $regex: query, $options: "i" } },
+                ],
+            })
+            .toArray();
+        if (users) {
+            return res.json({
+                message: "Users retrieved successfully.",
+                data: { users },
+            });
+        } else {
+            return res.status(404).json({
+                message: "User not found.",
+                data: {},
+            });
+        }
+    } catch (error) {
+        console.error(`[GET] Users error: ${error.message}`);
+        return res.status(500).json({
+            message: "Internal server error",
+            data: {},
+        });
+    }
+};
