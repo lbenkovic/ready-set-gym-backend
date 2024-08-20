@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
-import db from "../database/connection.js";
+import { db } from "../database/connection.js";
 import jwt from "jsonwebtoken";
+import { usersCollection } from "../models/collections.js";
 
-const usersCollection = db.collection("users");
+// const usersCollection = db.collection("users");
 usersCollection.createIndex({ email: 1 }, { unique: true });
 
 export const hashPassword = async (passwordInput) => {

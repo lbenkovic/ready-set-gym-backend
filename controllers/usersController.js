@@ -1,7 +1,8 @@
-import db from "../database/connection.js";
+// import db from "../database/connection.js";
 import bcrypt from "bcrypt";
+import { usersCollection } from "../models/collections.js";
 
-const usersCollection = db.collection("users");
+// const usersCollection = db.collection("users");
 
 export const getUserProfile = async (req, res) => {
     const email = req.cookies.email;

@@ -1,8 +1,9 @@
-import db from "../database/connection.js";
-import { ObjectId } from "mongodb";
+// import db from "../database/connection.js";
+// import { ObjectId } from "mongodb";
+import { usersCollection, weightCollection } from "../models/collections.js";
 
-const usersCollection = db.collection("users");
-const weightCollection = db.collection("weight");
+// const usersCollection = db.collection("users");
+// const weightCollection = db.collection("weight");
 
 export const recordWeight = async (req, res) => {
     const email = req.cookies.email;

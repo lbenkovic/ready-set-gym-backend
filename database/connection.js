@@ -12,4 +12,4 @@ try {
 }
 let db = conn.db(process.env.DATABASE);
 
-export default db;
+export { client, db };

@@ -1,6 +1,7 @@
-import db from "../database/connection.js";
+// import db from "../database/connection.js";
+import { recommendedWorkoutsCollection } from "../models/collections.js";
 
-const recommendedWorkoutsCollection = db.collection("recommendedWorkouts");
+// const recommendedWorkoutsCollection = db.collection("recommendedWorkouts");
 
 export const getRecommendedWorkouts = async (req, res) => {
     const workoutType = req.params.workoutType;

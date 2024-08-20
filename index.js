@@ -11,6 +11,7 @@ import { weightRouter } from "./routers/weightRouter.js";
 import { recipesRouter } from "./routers/recipesRouter.js";
 import { workoutPlanRouter } from "./routers/workoutPlanRouter.js";
 import { exerciseRouter } from "./routers/exerciseRouter.js";
+import { gymBrosRouter } from "./routers/gymBrosRouter.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
@@ -29,5 +30,6 @@ app.use("/", weightRouter());
 app.use("/", recipesRouter());
 app.use("/", workoutPlanRouter());
 app.use("/", exerciseRouter());
+app.use("/", gymBrosRouter());
 
 app.listen(port, () => console.log(`Slušam na portu ${port}!`));

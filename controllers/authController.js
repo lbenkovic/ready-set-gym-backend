@@ -3,11 +3,12 @@ import {
     addAuthCookieToRes,
     removeAuthCookieFromRes,
 } from "../services/cookieService.js";
-import db from "../database/connection.js";
+// import db from "../database/connection.js";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
+import { usersCollection } from "../models/collections.js";
 
-const usersCollection = db.collection("users");
+// const usersCollection = db.collection("users");
 usersCollection.createIndex({ email: 1 }, { unique: true });
 
 export const signup = async (req, res) => {
