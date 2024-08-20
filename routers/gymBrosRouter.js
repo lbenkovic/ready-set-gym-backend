@@ -13,9 +13,9 @@ export const gymBrosRouter = () => {
     return Router()
         .use(authMiddleware)
         .get("/gym-bros", getGymBros)
-        .get("/gym-bros-requests", getPendingRequests)
-        .post("/gym-bros-request", savePendingRequest)
-        .post("/gym-bros-accept", acceptPendingRequest)
-        .post("/gym-bros-deny", denyPendingRequest)
-        .post("/gym-bros-cancel-request", cancelPendingRequest);
+        .get("/gym-bros/requests", getPendingRequests)
+        .post("/gym-bros/requests", savePendingRequest)
+        .post("/gym-bros/requests/accept", acceptPendingRequest)
+        .post("/gym-bros/requests/deny", denyPendingRequest)
+        .post("/gym-bros/requests/cancel", cancelPendingRequest);
 };
