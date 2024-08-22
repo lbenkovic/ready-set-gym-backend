@@ -1,18 +1,31 @@
-// import db from "../database/connection.js";
 import bcrypt from "bcrypt";
 import { usersCollection } from "../models/collections.js";
 
-// const usersCollection = db.collection("users");
-
 export const getUserProfile = async (req, res) => {
-    const email = req.cookies.email;
+    let email = req.cookies.email;
+    if (req.params.email) {
+        email = req.params.email;
+    }
     try {
-        const user = await usersCollection.findOne({ email: email });
-        if (user) {
-            return res.json({
-                message: "User data retrieved successfully.",
-                data: { user },
-            });
+        const foundUser = await usersCollection.findOne({ email: email });
+        if (foundUser) {
+            if (req.params.email) {
+                const user = {
+                    email: foundUser.email,
+                    firstName: foundUser.firstName,
+                    lastName: foundUser.lastName,
+                };
+
+                return res.json({
+                    message: "Gym bro data retrieved successfully.",
+                    data: { user },
+                });
+            } else {
+                return res.json({
+                    message: "User data retrieved successfully.",
+                    data: { user: foundUser },
+                });
+            }
         } else {
             return res.status(404).json({
                 message: "User not found.",
@@ -92,7 +105,7 @@ export const updateUserProfile = async (req, res) => {
 export const searchUsers = async (req, res) => {
     const query = req.params.query;
     try {
-        const users = await usersCollection
+        const foundUsers = await usersCollection
             .find({
                 $or: [
                     { firstName: { $regex: query, $options: "i" } },
@@ -100,7 +113,10 @@ export const searchUsers = async (req, res) => {
                 ],
             })
             .toArray();
-        if (users) {
+
+        if (foundUsers && foundUsers.length > 0) {
+            const users = foundUsers.map(({ _id, password, ...rest }) => rest);
+
             return res.json({
                 message: "Users retrieved successfully.",
                 data: { users },

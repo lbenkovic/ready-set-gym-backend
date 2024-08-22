@@ -1,11 +1,8 @@
-// import db from "../database/connection.js";
 import { ObjectId } from "mongodb";
 import {
     usersCollection,
     workoutPlansCollection,
 } from "../models/collections.js";
-// const workoutPlansCollection = db.collection("WorkoutPlans");
-// const usersCollection = db.collection("users");
 
 export const addNewWorkoutPlan = async (req, res) => {
     const email = req.cookies.email;

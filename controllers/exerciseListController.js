@@ -1,7 +1,4 @@
-// import db from "../database/connection.js";
 import { exerciseListCollection } from "../models/collections.js";
-
-// const exerciseListCollection = db.collection("exerciselist");
 
 export const getExercises = async (req, res) => {
     try {

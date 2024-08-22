@@ -3,12 +3,9 @@ import {
     addAuthCookieToRes,
     removeAuthCookieFromRes,
 } from "../services/cookieService.js";
-// import db from "../database/connection.js";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
 import { usersCollection } from "../models/collections.js";
-
-// const usersCollection = db.collection("users");
 usersCollection.createIndex({ email: 1 }, { unique: true });
 
 export const signup = async (req, res) => {
@@ -41,6 +38,7 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body);
     try {
         const authUser = await auth(email, password);
         const token = authUser.token;

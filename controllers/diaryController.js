@@ -1,9 +1,5 @@
-// import db from "../database/connection.js";
 import { ObjectId } from "mongodb";
 import { usersCollection, diaryCollection } from "../models/collections.js";
-
-// const usersCollection = db.collection("users");
-// const diaryCollection = db.collection("diary");
 
 export const recordDiary = async (req, res) => {
     const email = req.cookies.email;
