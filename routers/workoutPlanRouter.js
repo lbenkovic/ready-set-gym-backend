@@ -9,7 +9,7 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 export const workoutPlanRouter = () => {
     return Router()
         .use(authMiddleware)
-        .post("/workout-plan", addNewWorkoutPlan)
         .get("/workout-plan", getUserWorkoutPlans)
+        .post("/workout-plan", addNewWorkoutPlan)
         .delete("/workout-plan/:planId", deletePlan);
 };

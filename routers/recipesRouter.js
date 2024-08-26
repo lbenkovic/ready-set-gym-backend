@@ -9,7 +9,7 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 export const recipesRouter = () => {
     return Router()
         .use(authMiddleware)
-        .post("/recipe", recordRecipes)
         .get("/recipe", getRecipes)
+        .post("/recipe", recordRecipes)
         .delete("/recipe/:recipeId", deleteRecipes);
 };

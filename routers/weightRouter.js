@@ -9,7 +9,7 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 export const weightRouter = () => {
     return Router()
         .use(authMiddleware)
-        .post("/weight", recordWeight)
         .get("/weight", getWeight)
+        .post("/weight", recordWeight)
         .delete("/weight/:date", deleteWeight);
 };

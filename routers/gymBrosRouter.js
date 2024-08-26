@@ -16,7 +16,6 @@ export const gymBrosRouter = () => {
         .get("/gym-bros", getGymBros)
         .get("/gym-bros/requests", getPendingRequests)
         .get("/gym-bros/requests/sent", getSentRequests)
-
         .post("/gym-bros/requests", savePendingRequest)
         .post("/gym-bros/requests/accept", acceptPendingRequest)
         .post("/gym-bros/requests/deny", denyPendingRequest)

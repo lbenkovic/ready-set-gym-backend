@@ -1,5 +1,4 @@
 import { chatLogsCollection } from "../models/collections.js";
-
 import { usersCollection } from "../models/collections.js";
 
 usersCollection.createIndex({ email: 1 }, { unique: true });
