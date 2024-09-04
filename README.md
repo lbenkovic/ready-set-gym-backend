@@ -2,10 +2,10 @@
 
 ---
 
-**Završni rad**
-**Autor:** Luka Benković
-**Studijski smje:** Informatika
-**Mentor:** doc.dr.sc. Nikola Tanković
+**Završni rad** <br>
+**Autor:** Luka Benković <br>
+**Studijski smje:** Informatika <br>
+**Mentor:** doc.dr.sc. Nikola Tanković <br>
 **Sveučilište Jurja Dobrile u Puli, Fakultet informatike**
 
 ---
