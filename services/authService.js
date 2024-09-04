@@ -22,7 +22,6 @@ export const verifyToken = (accessToken) => {
 
 export const auth = async (email, password) => {
     const userData = await usersCollection.findOne({ email: email });
-    console.log(userData);
     if (
         userData &&
         userData.password &&

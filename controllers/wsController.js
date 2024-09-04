@@ -7,7 +7,6 @@ export const handleWebSocketConnection = (ws, req) => {
     if (!activeConnections[userEmail]) {
         activeConnections[userEmail] = ws;
     }
-    console.log(activeConnections);
     ws.on("message", async (msg) => {
         const parsedMsg = JSON.parse(msg);
         const { recipient, content } = parsedMsg;

@@ -7,15 +7,12 @@ export const wsAuthMiddleware = async (ws, req, next) => {
         ws.close(4001, "Unauthorized: No email provided");
         return;
     }
-
     try {
         const user = await usersCollection.findOne({ email: userEmail });
-
         if (!user) {
             ws.close(4001, "Unauthorized: Invalid email");
             return;
         }
-
         req.user = { email: userEmail };
         next();
     } catch (error) {

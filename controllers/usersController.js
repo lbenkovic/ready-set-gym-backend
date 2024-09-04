@@ -48,13 +48,11 @@ export const updateUserProfile = async (req, res) => {
         const email = req.cookies.email;
         if (userData.new_password) {
             const user = await usersCollection.findOne({ email: email });
-            console.log("USER:", user);
             if (
                 user &&
                 user.password &&
                 (await bcrypt.compare(userData.old_password, user.password))
             ) {
-                console.log("Old password matches. Updating profile...");
                 const delta = {};
                 if (userData.firstName) {
                     delta.firstName = userData.firstName;
@@ -63,7 +61,6 @@ export const updateUserProfile = async (req, res) => {
                     delta.lastName = userData.lastName;
                 }
                 if (userData.new_password) {
-                    console.log("NEW PASSWORD", userData.new_password);
                     const newPasswordHash = await bcrypt.hash(
                         userData.new_password,
                         8
