@@ -22,5 +22,5 @@ pristup tim podacima.
 
 ---
 
-**Web aplikacija:** https://ready-set-gym.netlify.app
-**Dokumentacija:**
+**Web aplikacija:** [ReadySetGym](https://ready-set-gym.netlify.app) <br>
+**Dokumentacija:** [Razvoj poslužiteljskog sloja fitnes aplikacije "ReadySetGym" - Luka Benković](https://github.com/user-attachments/files/16873949/Zavrsni_rad-Luka_Benkovic.pdf)
